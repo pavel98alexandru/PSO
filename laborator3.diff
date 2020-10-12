@@ -1,0 +1,98 @@
+diff --git a/laborator3.diff b/laborator3.diff
+index b9593ae..e69de29 100644
+--- a/laborator3.diff
++++ b/laborator3.diff
+@@ -1,93 +0,0 @@
+-diff --git a/src/tests/threads/Make.tests b/src/tests/threads/Make.tests
+-index e337c33..fa36073 100644
+---- a/src/tests/threads/Make.tests
+-+++ b/src/tests/threads/Make.tests
+-@@ -9,7 +9,7 @@ priority-donate-nest priority-donate-sema priority-donate-lower		\
+- priority-fifo priority-preempt priority-sema priority-condvar		\
+- priority-donate-chain                                                   \
+- mlfqs-load-1 mlfqs-load-60 mlfqs-load-avg mlfqs-recent-1 mlfqs-fair-2	\
+--mlfqs-fair-20 mlfqs-nice-2 mlfqs-nice-10 mlfqs-block my_test)
+-+mlfqs-fair-20 mlfqs-nice-2 mlfqs-nice-10 mlfqs-block my_test my_test_create_threads)
+- 
+- # Sources for tests.
+- tests/threads_SRC  = tests/threads/tests.c
+-@@ -37,6 +37,7 @@ tests/threads_SRC += tests/threads/mlfqs-recent-1.c
+- tests/threads_SRC += tests/threads/mlfqs-fair.c
+- tests/threads_SRC += tests/threads/mlfqs-block.c
+- tests/threads_SRC += tests/threads/my_test.c
+-+tests/threads_SRC += tests/threads/my_test_create_threads.c
+- 
+- MLFQS_OUTPUTS = 				\
+- tests/threads/mlfqs-load-1.output		\
+-diff --git a/src/tests/threads/tests.c b/src/tests/threads/tests.c
+-index 0011f1d..4a5f117 100644
+---- a/src/tests/threads/tests.c
+-+++ b/src/tests/threads/tests.c
+-@@ -38,7 +38,8 @@ static struct test tests[] =
+-     {"mlfqs-nice-2", test_mlfqs_nice_2},
+-     {"mlfqs-nice-10", test_mlfqs_nice_10},
+-     {"mlfqs-block", test_mlfqs_block},
+--    {"my_test",my_test}
+-+    {"my_test",my_test},
+-+    {"my_test_create_threads",my_test_create_threads}
+-   };
+- 
+- static const char *test_name;
+-diff --git a/src/tests/threads/tests.h b/src/tests/threads/tests.h
+-index a958a55..d7c0bd4 100644
+---- a/src/tests/threads/tests.h
+-+++ b/src/tests/threads/tests.h
+-@@ -33,6 +33,7 @@ extern test_func test_mlfqs_nice_2;
+- extern test_func test_mlfqs_nice_10;
+- extern test_func test_mlfqs_block;
+- extern test_func my_test;
+-+extern test_func my_test_create_threads;
+- 
+- void msg (const char *, ...);
+- void fail (const char *, ...);
+-diff --git a/src/threads/thread.c b/src/threads/thread.c
+-index 955ccdc..615be00 100644
+---- a/src/threads/thread.c
+-+++ b/src/threads/thread.c
+-@@ -119,6 +119,30 @@ thread_start (void)
+- 
+- /* Called by the timer interrupt handler at each timer tick.
+-    Thus, this function runs in an external interrupt context. */
+-+
+-+void 
+-+print_thread_info(struct thread *the_thread)
+-+{
+-+	printf("Thread name: %s, Tid: %d , State: este ",the_thread->name,the_thread->tid);
+-+  switch(the_thread->status)
+-+  {
+-+    case 0:
+-+    printf("ready\n");
+-+    break;
+-+    case 1:
+-+    printf("running\n");
+-+    break;
+-+    case 2:
+-+    printf("blocked\n"); 
+-+    break;
+-+    case 3:
+-+    printf("dying\n");
+-+    break;
+-+    default:
+-+    break;
+-+  }
+-+}
+-+
+- void
+- thread_tick (void) 
+- {
+-diff --git a/src/threads/thread.h b/src/threads/thread.h
+-index 7965c06..87b2033 100644
+---- a/src/threads/thread.h
+-+++ b/src/threads/thread.h
+-@@ -137,5 +137,6 @@ int thread_get_nice (void);
+- void thread_set_nice (int);
+- int thread_get_recent_cpu (void);
+- int thread_get_load_avg (void);
+-+void print_thread_info(struct thread *the_thread);
+- 
+- #endif /* threads/thread.h */

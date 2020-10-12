@@ -119,6 +119,30 @@ thread_start (void)
 
 /* Called by the timer interrupt handler at each timer tick.
    Thus, this function runs in an external interrupt context. */
+
+void 
+print_thread_info(struct thread *the_thread)
+{
+	printf("Thread name: %s, Tid: %d , State: este ",the_thread->name,the_thread->tid);
+  switch(the_thread->status)
+  {
+    case 0:
+    printf("ready\n");
+    break;
+    case 1:
+    printf("running\n");
+    break;
+    case 2:
+    printf("blocked\n"); 
+    break;
+    case 3:
+    printf("dying\n");
+    break;
+    default:
+    break;
+  }
+}
+
 void
 thread_tick (void) 
 {
