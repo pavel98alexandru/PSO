@@ -26,7 +26,7 @@ void thread_function()
 
 void my_test_synch_sema()
 {
-    sema_init_name(sem,0,"the_test_semaphore");
+    sema_init_name(&sem,0,"the_test_semaphore");
 
     thread_create("Thread 1",PRI_DEFAULT,thread_function,NULL);
     thread_create("Thread 2",PRI_DEFAULT,thread_function,NULL);
