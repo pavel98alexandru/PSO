@@ -45,8 +45,8 @@ void
 sema_init (struct semaphore *sema, unsigned value) 
 {
   ASSERT (sema != NULL);
-
   sema->value = value;
+  sema->name= "noname";
   list_init (&sema->waiters);
 }
 
@@ -60,8 +60,13 @@ sema_init (struct semaphore *sema, unsigned value)
 void
 sema_down (struct semaphore *sema) 
 {
-  enum intr_level old_level;
+  if(strcmp(sema->name,"noname")!=0)
+  {
+    printf("Semaphore name: %s, Thread that called the function: %s\n",sema->name,thread_current()->name);
+  }
 
+  enum intr_level old_level;
+  
   ASSERT (sema != NULL);
   ASSERT (!intr_context ());
 
@@ -101,6 +106,15 @@ sema_try_down (struct semaphore *sema)
   return success;
 }
 
+void sema_init_name (struct semaphore *sema, unsigned value, const char *name)
+{
+  ASSERT (sema != NULL);
+  sema->value = value;
+  sema->name = name;
+  list_init (&sema->waiters);
+
+}
+
 /* Up or "V" operation on a semaphore.  Increments SEMA's value
    and wakes up one thread of those waiting for SEMA, if any.
 
@@ -108,6 +122,11 @@ sema_try_down (struct semaphore *sema)
 void
 sema_up (struct semaphore *sema) 
 {
+  if(strcmp(sema->name,"noname")!=0)
+  {
+    printf("Semaphore name: %s, Thread that called the function: %s\n",sema->name,thread_current()->name);
+  }
+  
   enum intr_level old_level;
 
   ASSERT (sema != NULL);
