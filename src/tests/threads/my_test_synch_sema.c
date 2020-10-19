@@ -18,9 +18,9 @@ struct semaphore * sem;
 void thread_function()
 {
     printf("Thread ID : %d before critical region!",thread_current()->tid);
-    sema_up(sem);
-    printf("Thread ID : %d inside critical region!",thread_current()->tid);
     sema_down(sem);
+    printf("Thread ID : %d inside critical region!",thread_current()->tid);
+    sema_up(sem);
     printf("Thread ID : %d after the critical region!",thread_current()->tid);
 }
 

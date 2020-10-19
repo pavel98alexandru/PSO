@@ -112,7 +112,6 @@ void sema_init_name (struct semaphore *sema, unsigned value, const char *name)
   sema->value = value;
   sema->name = name;
   list_init (&sema->waiters);
-
 }
 
 /* Up or "V" operation on a semaphore.  Increments SEMA's value
@@ -126,7 +125,7 @@ sema_up (struct semaphore *sema)
   {
     printf("Semaphore name: %s, Thread that called the function: %s\n",sema->name,thread_current()->name);
   }
-  
+
   enum intr_level old_level;
 
   ASSERT (sema != NULL);
