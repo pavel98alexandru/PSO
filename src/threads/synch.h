@@ -22,6 +22,7 @@ void sema_self_test (void);
 struct lock 
   {
     struct thread *holder;      /* Thread holding lock (for debugging). */
+    char * name;
     struct semaphore semaphore; /* Binary semaphore controlling access. */
   };
 
@@ -30,7 +31,7 @@ void lock_acquire (struct lock *);
 bool lock_try_acquire (struct lock *);
 void lock_release (struct lock *);
 bool lock_held_by_current_thread (const struct lock *);
-
+void lock_init_name (struct lock *lock, char * name);
 /* Condition variable. */
 struct condition 
   {

@@ -194,7 +194,16 @@ void
 lock_init (struct lock *lock)
 {
   ASSERT (lock != NULL);
+  lock->name="noname";
+  lock->holder = NULL;
+  sema_init (&lock->semaphore, 1);
+}
 
+void
+lock_init_name (struct lock *lock, char * name)
+{
+  ASSERT (lock != NULL);
+  lock->name = name;
   lock->holder = NULL;
   sema_init (&lock->semaphore, 1);
 }
