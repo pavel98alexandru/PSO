@@ -7,6 +7,7 @@
 #include "threads/interrupt.h"
 #include "threads/synch.h"
 #include "threads/thread.h"
+#include "threads/alarmclock.h"
   
 /* See [8254] for hardware details of the 8254 timer chip. */
 
@@ -89,11 +90,15 @@ timer_elapsed (int64_t then)
 void
 timer_sleep (int64_t ticks) 
 {
-  int64_t start = timer_ticks ();
+    enum intr_level level = 0;
 
-  ASSERT (intr_get_level () == INTR_ON);
-  while (timer_elapsed (start) < ticks) 
-    thread_yield ();
+    /* Implementation or the alarm clock */
+    level = intr_disable();
+    ac_sleep(ticks);
+
+    intr_set_level(level);
+
+    ASSERT (intr_get_level () == INTR_ON);
 }
 
 /* Sleeps for approximately MS milliseconds.  Interrupts must be

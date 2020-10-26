@@ -4,6 +4,7 @@
 #include <debug.h>
 #include <list.h>
 #include <stdint.h>
+#include <lib/fixedpoint.h>
 
 /* States in a thread's life cycle. */
 enum thread_status
@@ -87,7 +88,7 @@ struct thread
     enum thread_status status;          /* Thread state. */
     char name[16];                      /* Name (for debugging purposes). */
     uint8_t *stack;                     /* Saved stack pointer. */
-    int priority;                       /* Priority. */
+    fixed_point_t recent_cpu_time;
     struct list_elem allelem;           /* List element for all threads list. */
 
     /* Shared between thread.c and synch.c. */
@@ -98,6 +99,13 @@ struct thread
     uint32_t *pagedir;                  /* Page directory. */
 #endif
 
+    /* the following filed is added for making alarm clock work */
+    int64_t sleep_ticks;
+
+    /* Thread priority -> recalculated every 4 clock ticks for the MLFQ scheduler */
+    int           priority;
+
+    int nice;
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
   };
