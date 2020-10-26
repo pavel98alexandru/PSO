@@ -92,7 +92,6 @@ static tid_t allocate_tid(void);
  finishes. */
 void thread_init(void) {
 
-	ready_threads++;
 	ASSERT(intr_get_level() == INTR_OFF);
 
 	lock_init(&tid_lock);
@@ -198,6 +197,7 @@ tid_t
 thread_create (const char *name, int priority,
                thread_func *function, void *aux) 
 {
+	ready_threads++;
 	struct thread *t;
 	struct kernel_thread_frame *kf;
 	struct switch_entry_frame *ef;
@@ -272,6 +272,7 @@ thread_block (void)
 void
 thread_unblock (struct thread *t) 
 {
+	ready_threads++;
 	enum intr_level old_level;
 
 	ASSERT(is_thread(t));

@@ -1,0 +1,1838 @@
+diff --git a/src/.cproject b/src/.cproject
+deleted file mode 100644
+index 2eec321..0000000
+--- a/src/.cproject
++++ /dev/null
+@@ -1,49 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+-	<storageModule moduleId="org.eclipse.cdt.core.settings">
+-		<cconfiguration id="0.2060610253">
+-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.2060610253" moduleId="org.eclipse.cdt.core.settings" name="Default">
+-				<externalSettings/>
+-				<extensions>
+-					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+-					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+-					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+-				</extensions>
+-			</storageModule>
+-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+-				<configuration buildProperties="" description="" id="0.2060610253" name="Default" parent="org.eclipse.cdt.build.core.prefbase.cfg">
+-					<folderInfo id="0.2060610253." name="/" resourcePath="">
+-						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.643314068" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
+-							<targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.643314068.1879489316" name=""/>
+-							<builder id="org.eclipse.cdt.build.core.settings.default.builder.730077561" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+-							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.1317563693" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
+-							<tool id="org.eclipse.cdt.build.core.settings.holder.1618478888" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
+-								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.474286439" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+-							</tool>
+-							<tool id="org.eclipse.cdt.build.core.settings.holder.1146851235" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
+-								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1937764857" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+-							</tool>
+-							<tool id="org.eclipse.cdt.build.core.settings.holder.29152949" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
+-								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1543851799" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+-							</tool>
+-						</toolChain>
+-					</folderInfo>
+-				</configuration>
+-			</storageModule>
+-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+-		</cconfiguration>
+-	</storageModule>
+-	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+-		<project id="pintos-mlfq.null.1899968973" name="pintos-mlfq"/>
+-	</storageModule>
+-	<storageModule moduleId="scannerConfiguration">
+-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+-		<scannerConfigBuildInfo instanceId="0.2060610253">
+-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+-		</scannerConfigBuildInfo>
+-	</storageModule>
+-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+-</cproject>
+diff --git a/src/.project b/src/.project
+deleted file mode 100644
+index fd8763b..0000000
+--- a/src/.project
++++ /dev/null
+@@ -1,27 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<projectDescription>
+-	<name>pintos-mlfq</name>
+-	<comment></comment>
+-	<projects>
+-	</projects>
+-	<buildSpec>
+-		<buildCommand>
+-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+-			<triggers>clean,full,incremental,</triggers>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+-		<buildCommand>
+-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+-			<triggers>full,incremental,</triggers>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+-	</buildSpec>
+-	<natures>
+-		<nature>org.eclipse.cdt.core.cnature</nature>
+-		<nature>org.eclipse.cdt.core.ccnature</nature>
+-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+-	</natures>
+-</projectDescription>
+diff --git a/src/Make.config b/src/Make.config
+index e220c0a..0b191c0 100644
+--- a/src/Make.config
++++ b/src/Make.config
+@@ -41,13 +41,11 @@ endif
+ # Compiler and assembler invocation.
+ DEFINES =
+ WARNINGS = -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers
+-CFLAGS = -g -msoft-float -O
++CFLAGS = -g -msoft-float -O0 -march=i686 -fno-PIE
+ CPPFLAGS = -nostdinc -I$(SRCDIR) -I$(SRCDIR)/lib
+ ASFLAGS = -Wa,--gstabs
+-LDFLAGS = 
+-DEPS = -MMD -MF $(@:.o=.d)
+-CFLAGS += -fno-PIE
+ LDFLAGS = -no-pie
++DEPS = -MMD -MF $(@:.o=.d)
+ 
+ # Added at UTCN due to errors in syscalls
+ CFLAGS += -fno-omit-frame-pointer
+diff --git a/src/Makefile.build b/src/Makefile.build
+index c1b1484..7a6e6d3 100644
+--- a/src/Makefile.build
++++ b/src/Makefile.build
+@@ -21,6 +21,7 @@ threads_SRC += threads/intr-stubs.S	# Interrupt stubs.
+ threads_SRC += threads/synch.c		# Synchronization.
+ threads_SRC += threads/palloc.c		# Page allocator.
+ threads_SRC += threads/malloc.c		# Subpage allocator.
++threads_SRC += threads/myfile.c
+ 
+ # Device driver code.
+ devices_SRC  = devices/pit.c		# Programmable interrupt timer chip.
+@@ -45,7 +46,6 @@ lib_SRC += lib/stdlib.c			# Utility functions.
+ lib_SRC += lib/string.c			# String functions.
+ lib_SRC += lib/arithmetic.c		# 64-bit arithmetic for GCC.
+ lib_SRC += lib/ustar.c			# Unix standard tar format utilities.
+-lib_SRC += lib/fixedpoint.c             # fixed point arithmetics
+ 
+ # Kernel-specific library code.
+ lib/kernel_SRC  = lib/kernel/debug.c	# Debug helpers.
+@@ -81,7 +81,7 @@ threads/kernel.lds.s: CPPFLAGS += -P
+ threads/kernel.lds.s: threads/kernel.lds.S threads/loader.h
+ 
+ kernel.o: threads/kernel.lds.s $(OBJECTS) 
+-	$(LD) -T $< -o $@ $(OBJECTS) ../alarmclock.o
++	$(LD) -T $< -o $@ $(OBJECTS)
+ 
+ kernel.bin: kernel.o
+ 	$(OBJCOPY) -R .note -R .comment -S $< $@
+diff --git a/src/devices/block.c b/src/devices/block.c
+index a3acec1..648950a 100644
+--- a/src/devices/block.c
++++ b/src/devices/block.c
+@@ -29,6 +29,13 @@ static struct block *block_by_role[BLOCK_ROLE_CNT];
+ 
+ static struct block *list_elem_to_block (struct list_elem *);
+ 
++// BEGIN - added UTCN (Nov 6th, 2018)
++void blocks_init(void)
++{
++	list_init(&all_blocks);
++}
++// END - added UTCN (Nov 6th, 2018)
++
+ /* Returns a human-readable name for the given block device
+    TYPE. */
+ const char *
+@@ -44,6 +51,15 @@ block_type_name (enum block_type type)
+       "foreign",
+     };
+ 
++  // BEGIN - changed UTCN (Nov 6th, 2018)
++  block_type_names[0] = "kernel";
++  block_type_names[1] = "filesys";
++  block_type_names[2] = "scratch";
++  block_type_names[3] = "swap";
++  block_type_names[4] = "raw";
++  block_type_names[5] = "foreign";
++  // END - changed UTCN (Nov 6th, 2018)
++
+   ASSERT (type < BLOCK_CNT);
+   return block_type_names[type];
+ }
+diff --git a/src/devices/block.h b/src/devices/block.h
+index 21732d6..77ec872 100644
+--- a/src/devices/block.h
++++ b/src/devices/block.h
+@@ -41,6 +41,10 @@ enum block_type
+ 
+ const char *block_type_name (enum block_type);
+ 
++// BEGIN - added by UTCN (Nov 6th, 2018)
++void blocks_init(void);
++// END - added by UTCN (Nov 6th, 2018)
++
+ /* Finding block devices. */
+ struct block *block_get_role (enum block_type);
+ void block_set_role (enum block_type, struct block *);
+diff --git a/src/devices/ide.c b/src/devices/ide.c
+index 2cc0292..acdc83d 100644
+--- a/src/devices/ide.c
++++ b/src/devices/ide.c
+@@ -97,12 +97,30 @@ static void select_device_wait (const struct ata_disk *);
+ 
+ static void interrupt_handler (struct intr_frame *);
+ 
++// BEGIN - changed UTCN (Nov 6th, 2018)
++// moved here from below and commented
++// static struct block_operations ide_operations =
++//  {
++//   ide_read,
++//    ide_write
++//  };
++static void ide_read (void *d_, block_sector_t sec_no, void *buffer);
++static void ide_write (void *d_, block_sector_t sec_no, const void *buffer);
++// END - changed UTCN (Nov 6th, 2018)
++ 
++
+ /* Initialize the disk subsystem and detect disks. */
+ void
+ ide_init (void) 
+ {
+   size_t chan_no;
+ 
++  // BEGIN - changed UTCN (Nov 6th, 2018)
++   ide_operations.read = ide_read;
++   ide_operations.write = ide_write;
++   blocks_init();
++  // END - changed UTCN (Nov 6th, 2018)
++ 
+   for (chan_no = 0; chan_no < CHANNEL_CNT; chan_no++)
+     {
+       struct channel *c = &channels[chan_no];
+@@ -376,12 +394,6 @@ ide_write (void *d_, block_sector_t sec_no, const void *buffer)
+   lock_release (&c->lock);
+ }
+ 
+-static struct block_operations ide_operations =
+-  {
+-    ide_read,
+-    ide_write
+-  };
+-
+ /* Selects device D, waiting for it to become ready, and then
+    writes SEC_NO to the disk's sector selection registers.  (We
+    use LBA mode.) */
+diff --git a/src/devices/partition.c b/src/devices/partition.c
+index 7e97332..c0fb1d3 100644
+--- a/src/devices/partition.c
++++ b/src/devices/partition.c
+@@ -23,11 +23,23 @@ static void found_partition (struct block *, uint8_t type,
+                              int part_nr);
+ static const char *partition_type_name (uint8_t);
+ 
++// BEGIN - added UTCN (Nov 6th, 2018)
++static void partition_read (void *p_, block_sector_t sector, void *buffer);
++static void partition_write (void *p_, block_sector_t sector, const void *buffer);
++// END - added UTCN (Nov 6th, 2018) 
++
+ /* Scans BLOCK for partitions of interest to Pintos. */
+ void
+ partition_scan (struct block *block)
+ {
+   int part_nr = 0;
++
++  // BEGIN - added UTCN (Nov 6th, 2018)
++  partition_operations.read = partition_read;
++  partition_operations.write = partition_write;
++  // END - added UTCN (Nov 6th, 2018) 
++  
++  
+   read_partition_table (block, 0, 0, &part_nr);
+   if (part_nr == 0)
+     printf ("%s: Device contains no partitions\n", block_name (block));
+@@ -295,6 +307,111 @@ partition_type_name (uint8_t type)
+       [0xff] = "BBT",
+     };
+ 
++
++  // BEGIN - added UTCN (Nov 6th, 2018)
++   type_names[0x00] = "Empty";
++   type_names[0x01] = "FAT12";
++   type_names[0x02] = "XENIX root";
++   type_names[0x03] = "XENIX usr";
++      type_names[0x04] = "FAT16 <32M";
++      type_names[0x05] = "Extended";
++      type_names[0x06] = "FAT16";
++      type_names[0x07] = "HPFS/NTFS";
++      type_names[0x08] = "AIX";
++      type_names[0x09] = "AIX bootable";
++      type_names[0x0a] = "OS/2 Boot Manager";
++      type_names[0x0b] = "W95 FAT32";
++      type_names[0x0c] = "W95 FAT32 (LBA)";
++      type_names[0x0e] = "W95 FAT16 (LBA)";
++      type_names[0x0f] = "W95 Ext'd (LBA)";
++      type_names[0x10] = "OPUS";
++      type_names[0x11] = "Hidden FAT12";
++      type_names[0x12] = "Compaq diagnostics";
++      type_names[0x14] = "Hidden FAT16 <32M";
++      type_names[0x16] = "Hidden FAT16";
++      type_names[0x17] = "Hidden HPFS/NTFS";
++      type_names[0x18] = "AST SmartSleep";
++      type_names[0x1b] = "Hidden W95 FAT32";
++      type_names[0x1c] = "Hidden W95 FAT32 (LBA)";
++      type_names[0x1e] = "Hidden W95 FAT16 (LBA)";
++      type_names[0x20] = "Pintos OS kernel";
++      type_names[0x21] = "Pintos file system";
++      type_names[0x22] = "Pintos scratch";
++      type_names[0x23] = "Pintos swap";
++      type_names[0x24] = "NEC DOS";
++      type_names[0x39] = "Plan 9";
++      type_names[0x3c] = "PartitionMagic recovery";
++      type_names[0x40] = "Venix 80286";
++      type_names[0x41] = "PPC PReP Boot";
++      type_names[0x42] = "SFS";
++      type_names[0x4d] = "QNX4.x";
++      type_names[0x4e] = "QNX4.x 2nd part";
++      type_names[0x4f] = "QNX4.x 3rd part";
++      type_names[0x50] = "OnTrack DM";
++      type_names[0x51] = "OnTrack DM6 Aux1";
++      type_names[0x52] = "CP/M";
++      type_names[0x53] = "OnTrack DM6 Aux3";
++      type_names[0x54] = "OnTrackDM6";
++      type_names[0x55] = "EZ-Drive";
++      type_names[0x56] = "Golden Bow";
++      type_names[0x5c] = "Priam Edisk";
++      type_names[0x61] = "SpeedStor";
++      type_names[0x63] = "GNU HURD or SysV";
++      type_names[0x64] = "Novell Netware 286";
++      type_names[0x65] = "Novell Netware 386";
++      type_names[0x70] = "DiskSecure Multi-Boot";
++      type_names[0x75] = "PC/IX";
++      type_names[0x80] = "Old Minix";
++      type_names[0x81] = "Minix / old Linux";
++      type_names[0x82] = "Linux swap / Solaris";
++      type_names[0x83] = "Linux";
++      type_names[0x84] = "OS/2 hidden C: drive";
++      type_names[0x85] = "Linux extended";
++      type_names[0x86] = "NTFS volume set";
++      type_names[0x87] = "NTFS volume set";
++      type_names[0x88] = "Linux plaintext";
++      type_names[0x8e] = "Linux LVM";
++      type_names[0x93] = "Amoeba";
++      type_names[0x94] = "Amoeba BBT";
++      type_names[0x9f] = "BSD/OS";
++      type_names[0xa0] = "IBM Thinkpad hibernation";
++      type_names[0xa5] = "FreeBSD";
++      type_names[0xa6] = "OpenBSD";
++      type_names[0xa7] = "NeXTSTEP";
++      type_names[0xa8] = "Darwin UFS";
++      type_names[0xa9] = "NetBSD";
++      type_names[0xab] = "Darwin boot";
++      type_names[0xb7] = "BSDI fs";
++      type_names[0xb8] = "BSDI swap";
++      type_names[0xbb] = "Boot Wizard hidden";
++      type_names[0xbe] = "Solaris boot";
++      type_names[0xbf] = "Solaris";
++      type_names[0xc1] = "DRDOS/sec (FAT-12)";
++      type_names[0xc4] = "DRDOS/sec (FAT-16 < 32M)";
++      type_names[0xc6] = "DRDOS/sec (FAT-16)";
++      type_names[0xc7] = "Syrinx";
++      type_names[0xda] = "Non-FS data";
++      type_names[0xdb] = "CP/M / CTOS / ...";
++      type_names[0xde] = "Dell Utility";
++      type_names[0xdf] = "BootIt";
++      type_names[0xe1] = "DOS access";
++      type_names[0xe3] = "DOS R/O";
++      type_names[0xe4] = "SpeedStor";
++      type_names[0xeb] = "BeOS fs";
++      type_names[0xee] = "EFI GPT";
++      type_names[0xef] = "EFI (FAT-12/16/32)";
++      type_names[0xf0] = "Linux/PA-RISC boot";
++      type_names[0xf1] = "SpeedStor";
++      type_names[0xf4] = "SpeedStor";
++      type_names[0xf2] = "DOS secondary";
++      type_names[0xfd] = "Linux raid autodetect";
++      type_names[0xfe] = "LANstep";
++      type_names[0xff] = "BBT";
++
++  // END - added UTCN (Nov 6th, 2018) 
++  
++
++
+   return type_names[type] != NULL ? type_names[type] : "Unknown";
+ }
+ 
+diff --git a/src/devices/timer.c b/src/devices/timer.c
+index 17df937..befaaae 100644
+--- a/src/devices/timer.c
++++ b/src/devices/timer.c
+@@ -7,7 +7,6 @@
+ #include "threads/interrupt.h"
+ #include "threads/synch.h"
+ #include "threads/thread.h"
+-#include "threads/alarmclock.h"
+   
+ /* See [8254] for hardware details of the 8254 timer chip. */
+ 
+@@ -90,15 +89,11 @@ timer_elapsed (int64_t then)
+ void
+ timer_sleep (int64_t ticks) 
+ {
+-    enum intr_level level = 0;
++  int64_t start = timer_ticks ();
+ 
+-    /* Implementation or the alarm clock */
+-    level = intr_disable();
+-    ac_sleep(ticks);
+-
+-    intr_set_level(level);
+-
+-    ASSERT (intr_get_level () == INTR_ON);
++  ASSERT (intr_get_level () == INTR_ON);
++  while (timer_elapsed (start) < ticks) 
++    thread_yield ();
+ }
+ 
+ /* Sleeps for approximately MS milliseconds.  Interrupts must be
+diff --git a/src/lib/fixedpoint.c b/src/lib/fixedpoint.c
+deleted file mode 100644
+index d2e934d..0000000
+--- a/src/lib/fixedpoint.c
++++ /dev/null
+@@ -1,72 +0,0 @@
+-#include "fixedpoint.h"
+-#include "stdint.h"
+-
+-// convert an int to a fixed_point_t
+-fixed_point_t
+-fixed_point_convert_int(int n)
+-{
+-   return n << FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS;
+-}
+-
+-// convert a fixed point number to an integer
+-int
+-fixed_point_to_integer(fixed_point_t x)
+-{
+-   return x >> FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS;
+-}
+-
+-// add two fixed point numbers
+-fixed_point_t
+-fixed_point_add(fixed_point_t x, fixed_point_t y)
+-{
+-   return x + y;
+-}
+-
+-// Subtract two fixed point numbers
+-fixed_point_t
+-fixed_point_sub(fixed_point_t x, fixed_point_t y)
+-{
+-   return x - y;
+-}
+-
+-// add an integer to a fixed point number
+-fixed_point_t
+-fixed_point_add_int(fixed_point_t x, int n)
+-{
+-   return x + (n << FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS);
+-}
+-
+-// subtract an integer from a fixed point number
+-fixed_point_t
+-fixed_point_sub_int(fixed_point_t x, int n)
+-{
+-    return x - (n << FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS);
+-}
+-
+-// multiply two fixed point numbers
+-fixed_point_t
+-fixed_point_mul(fixed_point_t x, fixed_point_t y)
+-{
+-    return (((int64_t)x) * y) / ( 1 << FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS);
+-}
+-
+-// multiply a fixed point number and an integer
+-fixed_point_t
+-fixed_point_mul_int(fixed_point_t x, int n)
+-{
+-    return x * n;
+-}
+-
+-// divide two fixed point number
+-fixed_point_t
+-fixed_point_div(fixed_point_t x, fixed_point_t y)
+-{
+-    return ( ((int64_t)x) << FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS ) / y;
+-}
+-
+-// divide a fixed point number to an integer
+-fixed_point_t
+-fixed_point_div_int(fixed_point_t x, int n)
+-{
+-    return x / n;
+-}
+diff --git a/src/lib/fixedpoint.h b/src/lib/fixedpoint.h
+deleted file mode 100644
+index 358c613..0000000
+--- a/src/lib/fixedpoint.h
++++ /dev/null
+@@ -1,52 +0,0 @@
+-#ifndef _FIXED_POINT_INCLUDED_
+-#define _FIXED_POINT_INCULDED_
+-
+-/* This file provides a basic implementation for fixed point arithmetics
+- * Fixed point numbers are in signed p.q format where p+q=31
+- */
+-
+-#define FIXED_POINT_NUMBER_OF_DECIMAL_DIGITS 14
+-
+-typedef int fixed_point_t;
+-
+-// convert an int to a fixed_point_t
+-fixed_point_t
+-fixed_point_convert_int(int n);
+-
+-// convert a fixed point number to an integer 
+-int
+-fixed_point_to_integer(fixed_point_t x);
+-
+-// add two fixed point numbers
+-fixed_point_t
+-fixed_point_add(fixed_point_t x, fixed_point_t y);
+-
+-// Subtract two fixed point numbers
+-fixed_point_t
+-fixed_point_sub(fixed_point_t x, fixed_point_t y);
+-
+-// add an integer to a fixed point number
+-fixed_point_t
+-fixed_point_add_int(fixed_point_t x, int n);
+-
+-// subtract an integer from a fixed point number
+-fixed_point_t
+-fixed_point_sub_int(fixed_point_t x, int n);
+-
+-// multiply two fixed point numbers
+-fixed_point_t
+-fixed_point_mul(fixed_point_t x, fixed_point_t y);
+-
+-// multiply a fixed point number and an integer
+-fixed_point_t
+-fixed_point_mul_int(fixed_point_t x, int n);
+-
+-// divide two fixed point number
+-fixed_point_t
+-fixed_point_div(fixed_point_t x, fixed_point_t y);
+-
+-// divide a fixed point number to an integer
+-fixed_point_t
+-fixed_point_div_int(fixed_point_t x, int n);
+-
+-#endif
+diff --git a/src/lib/stdio.c b/src/lib/stdio.c
+index 8927c50..6dc29cb 100644
+--- a/src/lib/stdio.c
++++ b/src/lib/stdio.c
+@@ -135,10 +135,37 @@ struct integer_base
+     int group;                  /* Number of digits to group with ' flag. */
+   };
+ 
+-static const struct integer_base base_d = {10, "0123456789", 0, 3};
+-static const struct integer_base base_o = {8, "01234567", 0, 3};
+-static const struct integer_base base_x = {16, "0123456789abcdef", 'x', 4};
+-static const struct integer_base base_X = {16, "0123456789ABCDEF", 'X', 4};
++static struct integer_base base_d = {10, "0123456789", 0, 3};
++static struct integer_base base_o = {8, "01234567", 0, 3};
++static struct integer_base base_x = {16, "0123456789abcdef", 'x', 4};
++static struct integer_base base_X = {16, "0123456789ABCDEF", 'X', 4};
++
++// BEGIN - added at UTCN (2018)
++//  due to not initializing (maybe linking problems) correctly "static const" structures (see above "static const struct integer_base base_d" and the others)
++//  we changed them in non-constants and initialized explicitely
++void init_base_constants()
++{
++	base_d.base = 10;
++	base_d.digits = "0123456789";
++	base_d.x = 0;
++	base_d.group = 3;
++
++	base_o.base = 8;
++        base_o.digits = "01234567";
++        base_o.x = 0;
++        base_o.group = 3;
++
++	base_x.base = 16;
++        base_x.digits = "0123456789abcdef";
++        base_x.x = 'x';
++        base_x.group = 4;
++
++	base_X.base = 16;
++        base_X.digits = "0123456789ABCDEF";
++        base_X.x = 'X';
++        base_X.group = 4;
++}
++// END - added at UTCN (2018)
+ 
+ static const char *parse_conversion (const char *format,
+                                      struct printf_conversion *,
+@@ -479,6 +506,7 @@ format_integer (uintmax_t value, bool is_signed, bool negative,
+   int pad_cnt;                  /* # of pad characters to fill field width. */
+   int digit_cnt;                /* # of digits output so far. */
+ 
++  	
+   /* Determine sign character, if any.
+      An unsigned conversion will never have a sign character,
+      even if one of the flags requests one. */
+diff --git a/src/lib/stdio.h b/src/lib/stdio.h
+index 2739c0a..c468610 100644
+--- a/src/lib/stdio.h
++++ b/src/lib/stdio.h
+@@ -16,6 +16,9 @@
+ #define STDOUT_FILENO 1
+ 
+ /* Standard functions. */
++
++void init_base_constants(void);
++
+ int printf (const char *, ...) PRINTF_FORMAT (1, 2);
+ int snprintf (char *, size_t, const char *, ...) PRINTF_FORMAT (3, 4);
+ int vprintf (const char *, va_list) PRINTF_FORMAT (1, 0);
+diff --git a/src/tests/threads/Make.tests b/src/tests/threads/Make.tests
+index 4569035..e337c33 100644
+--- a/src/tests/threads/Make.tests
++++ b/src/tests/threads/Make.tests
+@@ -1,7 +1,7 @@
+ # -*- makefile -*-
+ 
+ # Test names.
+-tests/threads_TESTS = $(addprefix tests/threads/,alarm-single		\
++tests/threads_TESTS = $(addprefix tests/threads/,alarm-single 		\
+ alarm-multiple alarm-simultaneous alarm-priority alarm-zero		\
+ alarm-negative priority-change priority-donate-one			\
+ priority-donate-multiple priority-donate-multiple2			\
+@@ -9,7 +9,7 @@ priority-donate-nest priority-donate-sema priority-donate-lower		\
+ priority-fifo priority-preempt priority-sema priority-condvar		\
+ priority-donate-chain                                                   \
+ mlfqs-load-1 mlfqs-load-60 mlfqs-load-avg mlfqs-recent-1 mlfqs-fair-2	\
+-mlfqs-fair-20 mlfqs-nice-2 mlfqs-nice-10 mlfqs-block)
++mlfqs-fair-20 mlfqs-nice-2 mlfqs-nice-10 mlfqs-block my_test)
+ 
+ # Sources for tests.
+ tests/threads_SRC  = tests/threads/tests.c
+@@ -36,6 +36,7 @@ tests/threads_SRC += tests/threads/mlfqs-load-avg.c
+ tests/threads_SRC += tests/threads/mlfqs-recent-1.c
+ tests/threads_SRC += tests/threads/mlfqs-fair.c
+ tests/threads_SRC += tests/threads/mlfqs-block.c
++tests/threads_SRC += tests/threads/my_test.c
+ 
+ MLFQS_OUTPUTS = 				\
+ tests/threads/mlfqs-load-1.output		\
+diff --git a/src/tests/threads/tests.c b/src/tests/threads/tests.c
+index af15aee..0011f1d 100644
+--- a/src/tests/threads/tests.c
++++ b/src/tests/threads/tests.c
+@@ -9,7 +9,7 @@ struct test
+     test_func *function;
+   };
+ 
+-static const struct test tests[] = 
++static struct test tests[] = 
+   {
+     {"alarm-single", test_alarm_single},
+     {"alarm-multiple", test_alarm_multiple},
+@@ -38,6 +38,7 @@ static const struct test tests[] =
+     {"mlfqs-nice-2", test_mlfqs_nice_2},
+     {"mlfqs-nice-10", test_mlfqs_nice_10},
+     {"mlfqs-block", test_mlfqs_block},
++    {"my_test",my_test}
+   };
+ 
+ static const char *test_name;
+@@ -48,6 +49,93 @@ run_test (const char *name)
+ {
+   const struct test *t;
+ 
++  // BEGIN - added at UTCN (2018)
++  //  due to not initializing (maybe linking problems) correctly "static const" structures (see above "static const struct test tests[]")
++  //  we changed them in non-constants and initialized explicitely
++
++  tests[0].name = "alarm-single";
++  tests[0].function = test_alarm_single;
++
++  tests[1].name = "alarm-multiple";
++  tests[1].function = test_alarm_multiple;
++
++  tests[2].name = "alarm-simultaneous";
++  tests[2].function = test_alarm_simultaneous;
++
++  tests[3].name = "alarm-priority";
++  tests[3].function = test_alarm_priority;
++
++  tests[4].name = "alarm-zero";
++  tests[4].function = test_alarm_zero;
++
++  tests[5].name = "alarm-negative";
++  tests[5].function = test_alarm_negative;
++
++  tests[6].name = "priority-change";
++  tests[6].function = test_priority_change;
++
++  tests[7].name = "priority-donate-one";
++  tests[7].function = test_priority_donate_one;
++
++  tests[8].name = "priority-donate-multiple";
++  tests[8].function = test_priority_donate_multiple;
++
++  tests[9].name = "priority-donate-multiple2";
++  tests[9].function = test_priority_donate_multiple2;
++
++  tests[10].name = "priority-donate-nest";
++  tests[10].function = test_priority_donate_nest;
++
++  tests[11].name = "priority-donate-sema";
++  tests[11].function = test_priority_donate_sema;
++
++  tests[12].name = "priority-donate-lower";
++  tests[12].function = test_priority_donate_lower;
++
++  tests[13].name = "priority-donate-chain";
++  tests[13].function = test_priority_donate_chain;
++
++  tests[14].name = "priority-fifo";
++  tests[14].function = test_priority_fifo;
++
++  tests[15].name = "priority-preempt";
++  tests[15].function = test_priority_preempt;
++
++  tests[16].name = "priority-sema";
++  tests[16].function = test_priority_sema;
++
++  tests[17].name = "priority-condvar";
++  tests[17].function = test_priority_condvar;
++
++  tests[18].name = "mlfqs-load-1";
++  tests[18].function = test_mlfqs_load_1;
++
++  tests[19].name = "mlfqs-load-60";
++  tests[19].function = test_mlfqs_load_60;
++
++  tests[20].name = "mlfqs-load-avg";
++  tests[20].function = test_mlfqs_load_avg;
++
++  tests[21].name = "mlfqs-recent-1";
++  tests[21].function = test_mlfqs_recent_1;
++
++  tests[22].name = "mlfqs-fair-2";
++  tests[22].function = test_mlfqs_fair_2;
++
++  tests[23].name = "mlfqs-fair-20";
++  tests[23].function = test_mlfqs_fair_20;
++
++  tests[24].name = "mlfqs-nice-2";
++  tests[24].function = test_mlfqs_nice_2;
++
++  tests[25].name = "mlfqs-nice-10";
++  tests[25].function = test_mlfqs_nice_10;
++
++  tests[26].name = "mlfqs-block";
++  tests[26].function = test_mlfqs_block;
++
++  // END - added at UTCN (2018)
++
+   for (t = tests; t < tests + sizeof tests / sizeof *tests; t++)
+     if (!strcmp (name, t->name))
+       {
+diff --git a/src/tests/threads/tests.h b/src/tests/threads/tests.h
+index cd9d489..a958a55 100644
+--- a/src/tests/threads/tests.h
++++ b/src/tests/threads/tests.h
+@@ -32,6 +32,7 @@ extern test_func test_mlfqs_fair_20;
+ extern test_func test_mlfqs_nice_2;
+ extern test_func test_mlfqs_nice_10;
+ extern test_func test_mlfqs_block;
++extern test_func my_test;
+ 
+ void msg (const char *, ...);
+ void fail (const char *, ...);
+diff --git a/src/threads/alarmclock.h b/src/threads/alarmclock.h
+deleted file mode 100644
+index 3dc603b..0000000
+--- a/src/threads/alarmclock.h
++++ /dev/null
+@@ -1,8 +0,0 @@
+-#ifndef ALARMCLOCK_H_
+-#define ALARMCLOCK_H_
+-
+-void ac_init(void);
+-void ac_sleep(int ticks);
+-void ac_wakeup(void);
+-
+-#endif /* ALARMCLOCK_H_ */
+diff --git a/src/threads/alarmclock.o b/src/threads/alarmclock.o
+deleted file mode 100644
+index f7b7dee..0000000
+Binary files a/src/threads/alarmclock.o and /dev/null differ
+diff --git a/src/threads/init.c b/src/threads/init.c
+index cebec2c..c3a54cf 100644
+--- a/src/threads/init.c
++++ b/src/threads/init.c
+@@ -3,6 +3,7 @@
+ #include <debug.h>
+ #include <inttypes.h>
+ #include <limits.h>
++#include "myheader.h"
+ #include <random.h>
+ #include <stddef.h>
+ #include <stdio.h>
+@@ -90,9 +91,10 @@ main (void)
+   thread_init ();
+   console_init ();  
+ 
++  init_base_constants();
++
+   /* Greet user. */
+-  printf ("Pintos booting with %'"PRIu32" kB RAM...\n",
+-          init_ram_pages * PGSIZE / 1024);
++  printf ("Pintos booting with %'"PRIu32" kB RAM...\n", init_ram_pages * PGSIZE / 1024);
+ 
+   /* Initialize memory system. */
+   palloc_init (user_page_limit);
+@@ -128,6 +130,10 @@ main (void)
+ #endif
+ 
+   printf ("Boot complete.\n");
++
++	myfunction();
++  
++  printf("This is my first line of code in Pintos!\n");
+   
+   /* Run actions specified on kernel command line. */
+   run_actions (argv);
+@@ -306,7 +312,7 @@ run_actions (char **argv)
+     };
+ 
+   /* Table of supported actions. */
+-  static const struct action actions[] = 
++  static struct action actions[] = 
+     {
+       {"run", 2, run_task},
+ #ifdef FILESYS
+@@ -319,9 +325,40 @@ run_actions (char **argv)
+       {NULL, 0, NULL},
+     };
+ 
++    // BEGIN - added at UTCN (2018)
++    //  due to not initializing (maybe linking problems) correctly "static const" structures (see above "static const struct action actions[]")
++    //  we changed them in non-constants and initialized explicitely
++    actions[0].name = "run";
++    actions[0].argc = 2;
++    actions[0].function = run_task;
++
++#ifdef FILESYS
++    actions[1].name = "ls";
++    actions[1].argc = 1;
++    actions[1].function = fsutil_ls;
++
++    actions[2].name = "cat";
++    actions[2].argc = 2;
++    actions[2].function = fsutil_cat;
++
++    actions[3].name = "rm";
++    actions[3].argc = 2;
++    actions[3].function = fsutil_rm;
++
++    actions[4].name = "extract";
++    actions[4].argc = 1;
++    actions[4].function = fsutil_extract;
++
++    actions[5].name = "append";
++    actions[5].argc = 2;
++    actions[5].function = fsutil_append;
++#endif
++
++    // END - added at UTCN (2018)
++
+   while (*argv != NULL)
+     {
+-      const struct action *a;
++      struct action *a;
+       int i;
+ 
+       /* Find action name. */
+diff --git a/src/threads/thread.c b/src/threads/thread.c
+index 71c8300..955ccdc 100644
+--- a/src/threads/thread.c
++++ b/src/threads/thread.c
+@@ -11,29 +11,23 @@
+ #include "threads/switch.h"
+ #include "threads/synch.h"
+ #include "threads/vaddr.h"
+-#include "devices/timer.h"
+-#include "lib/fixedpoint.h"
+-#include "threads/alarmclock.h"
+ #ifdef USERPROG
+ #include "userprog/process.h"
+ #endif
+ 
+-
+ /* Random value for struct thread's `magic' member.
+- Used to detect stack overflow.  See the big comment at the top
+- of thread.h for details. */
++   Used to detect stack overflow.  See the big comment at the top
++   of thread.h for details. */
+ #define THREAD_MAGIC 0xcd6abf4b
+ 
+ /* List of processes in THREAD_READY state, that is, processes
+- that are ready to run but not actually running. */
++   that are ready to run but not actually running. */
+ static struct list ready_list;
+ 
+ /* List of all processes.  Processes are added to this list
+- when they are first scheduled and removed when they exit. */
++   when they are first scheduled and removed when they exit. */
+ static struct list all_list;
+ 
+-static struct list priority_lists[64];
+-
+ /* Idle thread. */
+ static struct thread *idle_thread;
+ 
+@@ -44,269 +38,242 @@ static struct thread *initial_thread;
+ static struct lock tid_lock;
+ 
+ /* Stack frame for kernel_thread(). */
+-struct kernel_thread_frame {
+-	void *eip; /* Return address. */
+-	thread_func *function; /* Function to call. */
+-	void *aux; /* Auxiliary data for function. */
+-};
++struct kernel_thread_frame 
++  {
++    void *eip;                  /* Return address. */
++    thread_func *function;      /* Function to call. */
++    void *aux;                  /* Auxiliary data for function. */
++  };
+ 
+ /* Statistics. */
+-static long long idle_ticks; /* # of timer ticks spent idle. */
+-static long long kernel_ticks; /* # of timer ticks in kernel threads. */
+-static long long user_ticks; /* # of timer ticks in user programs. */
++static long long idle_ticks;    /* # of timer ticks spent idle. */
++static long long kernel_ticks;  /* # of timer ticks in kernel threads. */
++static long long user_ticks;    /* # of timer ticks in user programs. */
+ 
+ /* Scheduling. */
+ #define TIME_SLICE 4            /* # of timer ticks to give each thread. */
+-static unsigned thread_ticks; /* # of timer ticks since last yield. */
++static unsigned thread_ticks;   /* # of timer ticks since last yield. */
+ 
+ /* If false (default), use round-robin scheduler.
+- If true, use multi-level feedback queue scheduler.
+- Controlled by kernel command-line option "-o mlfqs". */
+-
+-int ready_threads;
++   If true, use multi-level feedback queue scheduler.
++   Controlled by kernel command-line option "-o mlfqs". */
+ bool thread_mlfqs;
+-static void kernel_thread(thread_func *, void *aux);
+-
+-static void idle(void *aux UNUSED);
+-static struct thread *running_thread(void);
+-static struct thread *next_thread_to_run(void);
+-static void init_thread(struct thread *, const char *name, int priority);
+-static bool is_thread(struct thread *) UNUSED;
+-static void *alloc_frame(struct thread *, size_t size);
+-static void schedule(void);
+-void thread_schedule_tail(struct thread *prev);
+-static tid_t allocate_tid(void);
+ 
+-/* Initializes the threading system by transforming the code
+- that's currently running into a thread.  This can't work in
+- general and it is possible in this case only because loader.S
+- was careful to put the bottom of the stack at a page boundary.
+-
+- Also initializes the run queue and the tid lock.
++static void kernel_thread (thread_func *, void *aux);
+ 
+- After calling this function, be sure to initialize the page
+- allocator before trying to create any threads with
+- thread_create().
++static void idle (void *aux UNUSED);
++static struct thread *running_thread (void);
++static struct thread *next_thread_to_run (void);
++static void init_thread (struct thread *, const char *name, int priority);
++static bool is_thread (struct thread *) UNUSED;
++static void *alloc_frame (struct thread *, size_t size);
++static void schedule (void);
++void thread_schedule_tail (struct thread *prev);
++static tid_t allocate_tid (void);
+ 
+- It is not safe to call thread_current() until this function
+- finishes. */
+-void thread_init(void) {
++/* Initializes the threading system by transforming the code
++   that's currently running into a thread.  This can't work in
++   general and it is possible in this case only because loader.S
++   was careful to put the bottom of the stack at a page boundary.
+ 
+-	ready_threads++;
+-	ASSERT(intr_get_level() == INTR_OFF);
++   Also initializes the run queue and the tid lock.
+ 
+-	lock_init(&tid_lock);
+-	list_init(&ready_list);
+-	list_init(&all_list);
++   After calling this function, be sure to initialize the page
++   allocator before trying to create any threads with
++   thread_create().
+ 
+-	for(int i=0;i<64;i++)
+-	{
+-		list_init(&priority_lists[i]);
+-	}
++   It is not safe to call thread_current() until this function
++   finishes. */
++void
++thread_init (void) 
++{
++  ASSERT (intr_get_level () == INTR_OFF);
+ 
+-	/* initialize alarm clock */
+-	ac_init();
++  lock_init (&tid_lock);
++  list_init (&ready_list);
++  list_init (&all_list);
+ 
+-	/* Set up a thread structure for the running thread. */
+-	initial_thread = running_thread();
+-	init_thread(initial_thread, "main", PRI_DEFAULT);
+-	initial_thread->status = THREAD_RUNNING;
+-	initial_thread->tid = allocate_tid();
++  /* Set up a thread structure for the running thread. */
++  initial_thread = running_thread ();
++  init_thread (initial_thread, "main", PRI_DEFAULT);
++  initial_thread->status = THREAD_RUNNING;
++  initial_thread->tid = allocate_tid ();
+ }
+ 
+ /* Starts preemptive thread scheduling by enabling interrupts.
+- Also creates the idle thread. */
+-void thread_start(void) {
+-	/* Create the idle thread. */
+-	struct semaphore idle_started;
+-	sema_init(&idle_started, 0);
+-	thread_create("idle", PRI_MIN, idle, &idle_started);
+-
+-	/* Start preemptive thread scheduling. */
+-	intr_enable();
+-
+-	/* Wait for the idle thread to initialize idle_thread. */
+-	sema_down(&idle_started);
++   Also creates the idle thread. */
++void
++thread_start (void) 
++{
++  /* Create the idle thread. */
++  struct semaphore idle_started;
++  sema_init (&idle_started, 0);
++  thread_create ("idle", PRI_MIN, idle, &idle_started);
++
++  /* Start preemptive thread scheduling. */
++  intr_enable ();
++
++  /* Wait for the idle thread to initialize idle_thread. */
++  sema_down (&idle_started);
+ }
+ 
+ /* Called by the timer interrupt handler at each timer tick.
+- Thus, this function runs in an external interrupt context. */
+-void thread_tick(void) {
+-	struct thread *t = thread_current();
++   Thus, this function runs in an external interrupt context. */
++void
++thread_tick (void) 
++{
++  struct thread *t = thread_current ();
+ 
+-	/* Update statistics. */
+-	if (t == idle_thread)
+-		idle_ticks++;
++  /* Update statistics. */
++  if (t == idle_thread)
++    idle_ticks++;
+ #ifdef USERPROG
+-	else if (t->pagedir != NULL)
+-	user_ticks++;
++  else if (t->pagedir != NULL)
++    user_ticks++;
+ #endif
+-	else
+-		kernel_ticks++;
+-
+-	/* wake all the threads waiting for the alarm clock*/
+-    ac_wakeup();
+-
+-	if (thread_mlfqs) {
+-        /*increment the recent_cpu_time for the current thread*/
+-
+-		if (0 == timer_ticks() % TIMER_FREQ) {
+-			/* recompute the load_average */
+-		}
+-
+-		if (0 == timer_ticks() % TIMER_FREQ) {
+-			/* recompute the recent_cpu_time for all threads*/
+-		}
+-
+-		if (0 == timer_ticks() % 4) {
+-			/* recompute priority for all threads */
+-		}
+-
+-		/* check if we need to schedule another thread due to priority changes */
+-		
+-	}
+-	else
+-	{
+-		/* Enforce preemption. */
+-		if (++thread_ticks >= TIME_SLICE)
+-			intr_yield_on_return();
+-	}
++  else
++    kernel_ticks++;
++
++  /* Enforce preemption. */
++  if (++thread_ticks >= TIME_SLICE)
++    intr_yield_on_return ();
+ }
+ 
+ /* Prints thread statistics. */
+-void thread_print_stats(void) {
+-	printf("Thread: %lld idle ticks, %lld kernel ticks, %lld user ticks\n",
+-			idle_ticks, kernel_ticks, user_ticks);
++void
++thread_print_stats (void) 
++{
++  printf ("Thread: %lld idle ticks, %lld kernel ticks, %lld user ticks\n",
++          idle_ticks, kernel_ticks, user_ticks);
+ }
+ 
+ /* Creates a new kernel thread named NAME with the given initial
+- PRIORITY, which executes FUNCTION passing AUX as the argument,
+- and adds it to the ready queue.  Returns the thread identifier
+- for the new thread, or TID_ERROR if creation fails.
+-
+- If thread_start() has been called, then the new thread may be
+- scheduled before thread_create() returns.  It could even exit
+- before thread_create() returns.  Contrariwise, the original
+- thread may run for any amount of time before the new thread is
+- scheduled.  Use a semaphore or some other form of
+- synchronization if you need to ensure ordering.
+-
+- The code provided sets the new thread's `priority' member to
+- PRIORITY, but no actual priority scheduling is implemented.
+- Priority scheduling is the goal of Problem 1-3. */
++   PRIORITY, which executes FUNCTION passing AUX as the argument,
++   and adds it to the ready queue.  Returns the thread identifier
++   for the new thread, or TID_ERROR if creation fails.
++
++   If thread_start() has been called, then the new thread may be
++   scheduled before thread_create() returns.  It could even exit
++   before thread_create() returns.  Contrariwise, the original
++   thread may run for any amount of time before the new thread is
++   scheduled.  Use a semaphore or some other form of
++   synchronization if you need to ensure ordering.
++
++   The code provided sets the new thread's `priority' member to
++   PRIORITY, but no actual priority scheduling is implemented.
++   Priority scheduling is the goal of Problem 1-3. */
+ tid_t
+ thread_create (const char *name, int priority,
+                thread_func *function, void *aux) 
+ {
+-	struct thread *t;
+-	struct kernel_thread_frame *kf;
+-	struct switch_entry_frame *ef;
+-	struct switch_threads_frame *sf;
+-	tid_t tid;
+-	enum intr_level old_level;
+-
+-	ASSERT(function != NULL);
++  struct thread *t;
++  struct kernel_thread_frame *kf;
++  struct switch_entry_frame *ef;
++  struct switch_threads_frame *sf;
++  tid_t tid;
++  enum intr_level old_level;
+ 
+-	/* Allocate thread. */
+-	t = palloc_get_page(PAL_ZERO);
+-	if (t == NULL)
+-		return TID_ERROR;
++  ASSERT (function != NULL);
+ 
+-	/* Initialize thread. */
+-	init_thread(t, name, priority);
++  /* Allocate thread. */
++  t = palloc_get_page (PAL_ZERO);
++  if (t == NULL)
++    return TID_ERROR;
+ 
+-	tid = t->tid = allocate_tid();
++  /* Initialize thread. */
++  init_thread (t, name, priority);
++  tid = t->tid = allocate_tid ();
+ 
+-	t->nice = thread_current()->nice;
+-	/* Prepare thread for first run by initializing its stack.
+-	 Do this atomically so intermediate values for the 'stack'
+-	 member cannot be observed. */
+-	old_level = intr_disable();
++  /* Prepare thread for first run by initializing its stack.
++     Do this atomically so intermediate values for the 'stack' 
++     member cannot be observed. */
++  old_level = intr_disable ();
+ 
+-	/* Stack frame for kernel_thread(). */
+-	kf = alloc_frame(t, sizeof *kf);
+-	kf->eip = NULL;
+-	kf->function = function;
+-	kf->aux = aux;
++  /* Stack frame for kernel_thread(). */
++  kf = alloc_frame (t, sizeof *kf);
++  kf->eip = NULL;
++  kf->function = function;
++  kf->aux = aux;
+ 
+-	/* Stack frame for switch_entry(). */
+-	ef = alloc_frame(t, sizeof *ef);
+-	ef->eip = (void (*)(void)) kernel_thread;
++  /* Stack frame for switch_entry(). */
++  ef = alloc_frame (t, sizeof *ef);
++  ef->eip = (void (*) (void)) kernel_thread;
+ 
+-	/* Stack frame for switch_threads(). */
+-	sf = alloc_frame(t, sizeof *sf);
+-	sf->eip = switch_entry;
+-	sf->ebp = 0;
++  /* Stack frame for switch_threads(). */
++  sf = alloc_frame (t, sizeof *sf);
++  sf->eip = switch_entry;
++  sf->ebp = 0;
+ 
+-	intr_set_level(old_level);
++  intr_set_level (old_level);
+ 
+-	/* Add to run queue. */
+-	thread_unblock(t);
++  /* Add to run queue. */
++  thread_unblock (t);
+ 
+-	return tid;
++  return tid;
+ }
+ 
+ /* Puts the current thread to sleep.  It will not be scheduled
+- again until awoken by thread_unblock().
++   again until awoken by thread_unblock().
+ 
+- This function must be called with interrupts turned off.  It
+- is usually a better idea to use one of the synchronization
+- primitives in synch.h. */
++   This function must be called with interrupts turned off.  It
++   is usually a better idea to use one of the synchronization
++   primitives in synch.h. */
+ void
+ thread_block (void) 
+ {
+-	ASSERT(!intr_context());
+-	ASSERT(intr_get_level() == INTR_OFF);
+-	thread_current()->status = THREAD_BLOCKED;
+-	schedule();
++  ASSERT (!intr_context ());
++  ASSERT (intr_get_level () == INTR_OFF);
++
++  thread_current ()->status = THREAD_BLOCKED;
++  schedule ();
+ }
+ 
+ /* Transitions a blocked thread T to the ready-to-run state.
+- This is an error if T is not blocked.  (Use thread_yield() to
+- make the running thread ready.)
++   This is an error if T is not blocked.  (Use thread_yield() to
++   make the running thread ready.)
+ 
+- This function does not preempt the running thread.  This can
+- be important: if the caller had disabled interrupts itself,
+- it may expect that it can atomically unblock a thread and
+- update other data. */
++   This function does not preempt the running thread.  This can
++   be important: if the caller had disabled interrupts itself,
++   it may expect that it can atomically unblock a thread and
++   update other data. */
+ void
+ thread_unblock (struct thread *t) 
+ {
+-	enum intr_level old_level;
+-
+-	ASSERT(is_thread(t));
+-
+-	old_level = intr_disable();
+-	ASSERT(t->status == THREAD_BLOCKED);
++  enum intr_level old_level;
+ 
+-	list_push_back(&ready_list, &t->elem);
++  ASSERT (is_thread (t));
+ 
+-	t->status = THREAD_READY;
+-	intr_set_level(old_level);
++  old_level = intr_disable ();
++  ASSERT (t->status == THREAD_BLOCKED);
++  list_push_back (&ready_list, &t->elem);
++  t->status = THREAD_READY;
++  intr_set_level (old_level);
+ }
+ 
+ /* Returns the name of the running thread. */
+ const char *
+-thread_name(void) {
+-	return thread_current()->name;
++thread_name (void) 
++{
++  return thread_current ()->name;
+ }
+ 
+ /* Returns the running thread.
+- This is running_thread() plus a couple of sanity checks.
+- See the big comment at the top of thread.h for details. */
++   This is running_thread() plus a couple of sanity checks.
++   See the big comment at the top of thread.h for details. */
+ struct thread *
+-thread_current(void) {
+-	struct thread *t = running_thread();
+-
+-	/* Make sure T is really a thread.
+-	 If either of these assertions fire, then your thread may
+-	 have overflowed its stack.  Each thread has less than 4 kB
+-	 of stack, so a few big automatic arrays or moderate
+-	 recursion can cause stack overflow. */
+-	ASSERT(is_thread(t));
+-	ASSERT(t->status == THREAD_RUNNING);
+-
+-	return t;
++thread_current (void) 
++{
++  struct thread *t = running_thread ();
++  
++  /* Make sure T is really a thread.
++     If either of these assertions fire, then your thread may
++     have overflowed its stack.  Each thread has less than 4 kB
++     of stack, so a few big automatic arrays or moderate
++     recursion can cause stack overflow. */
++  ASSERT (is_thread (t));
++  ASSERT (t->status == THREAD_RUNNING);
++
++  return t;
+ }
+ 
+ /* Returns the running thread's tid. */
+@@ -317,38 +284,37 @@ thread_tid (void)
+ }
+ 
+ /* Deschedules the current thread and destroys it.  Never
+- returns to the caller. */
++   returns to the caller. */
+ void
+ thread_exit (void) 
+ {
+-	ASSERT(!intr_context());
++  ASSERT (!intr_context ());
+ 
+ #ifdef USERPROG
+-	process_exit ();
++  process_exit ();
+ #endif
+ 
+-	/* Remove thread from all threads list, set our status to dying,
+-	 and schedule another process.  That process will destroy us
+-	 when it calls thread_schedule_tail(). */
+-	intr_disable();
+-	list_remove(&thread_current()->allelem);
+-	
+-	thread_current()->status = THREAD_DYING;
+-	schedule();
+-	NOT_REACHED ();
++  /* Remove thread from all threads list, set our status to dying,
++     and schedule another process.  That process will destroy us
++     when it calls thread_schedule_tail(). */
++  intr_disable ();
++  list_remove (&thread_current()->allelem);
++  thread_current ()->status = THREAD_DYING;
++  schedule ();
++  NOT_REACHED ();
+ }
+ 
+ /* Yields the CPU.  The current thread is not put to sleep and
+- may be scheduled again immediately at the scheduler's whim. */
++   may be scheduled again immediately at the scheduler's whim. */
+ void
+ thread_yield (void) 
+ {
+-	struct thread *cur = thread_current();
+-	enum intr_level old_level;
+-
+-	ASSERT(!intr_context());
++  struct thread *cur = thread_current ();
++  enum intr_level old_level;
++  
++  ASSERT (!intr_context ());
+ 
+-	old_level = intr_disable();
++  old_level = intr_disable ();
+   if (cur != idle_thread) 
+     list_push_back (&ready_list, &cur->elem);
+   cur->status = THREAD_READY;
+@@ -357,26 +323,27 @@ thread_yield (void)
+ }
+ 
+ /* Invoke function 'func' on all threads, passing along 'aux'.
+- This function must be called with interrupts off. */
++   This function must be called with interrupts off. */
+ void
+ thread_foreach (thread_action_func *func, void *aux)
+ {
+-	struct list_elem *e;
++  struct list_elem *e;
+ 
+-	ASSERT(intr_get_level() == INTR_OFF);
++  ASSERT (intr_get_level () == INTR_OFF);
+ 
+-	for (e = list_begin(&all_list); e != list_end(&all_list);
+-			e = list_next(e)) {
+-		struct thread *t = list_entry(e, struct thread, allelem);
+-		func(t, aux);
+-	}
++  for (e = list_begin (&all_list); e != list_end (&all_list);
++       e = list_next (e))
++    {
++      struct thread *t = list_entry (e, struct thread, allelem);
++      func (t, aux);
++    }
+ }
+ 
+ /* Sets the current thread's priority to NEW_PRIORITY. */
+ void
+ thread_set_priority (int new_priority) 
+ {
+-	thread_current()->priority = new_priority;
++  thread_current ()->priority = new_priority;
+ }
+ 
+ /* Returns the current thread's priority. */
+@@ -390,14 +357,15 @@ thread_get_priority (void)
+ void
+ thread_set_nice (int nice UNUSED) 
+ {
+-  thread_current() -> nice = nice;
++  /* Not yet implemented. */
+ }
+ 
+ /* Returns the current thread's nice value. */
+ int
+ thread_get_nice (void) 
+ {
+-  return thread_current()->nice;
++  /* Not yet implemented. */
++  return 0;
+ }
+ 
+ /* Returns 100 times the system load average. */
+@@ -418,39 +386,40 @@ thread_get_recent_cpu (void)
+ 
+ /* Idle thread.  Executes when no other thread is ready to run.
+ 
+- The idle thread is initially put on the ready list by
+- thread_start().  It will be scheduled once initially, at which
+- point it initializes idle_thread, "up"s the semaphore passed
+- to it to enable thread_start() to continue, and immediately
+- blocks.  After that, the idle thread never appears in the
+- ready list.  It is returned by next_thread_to_run() as a
+- special case when the ready list is empty. */
++   The idle thread is initially put on the ready list by
++   thread_start().  It will be scheduled once initially, at which
++   point it initializes idle_thread, "up"s the semaphore passed
++   to it to enable thread_start() to continue, and immediately
++   blocks.  After that, the idle thread never appears in the
++   ready list.  It is returned by next_thread_to_run() as a
++   special case when the ready list is empty. */
+ static void
+ idle (void *idle_started_ UNUSED) 
+ {
+-	struct semaphore *idle_started = idle_started_;
+-	idle_thread = thread_current();
+-	sema_up(idle_started);
+-
+-	for (;;) {
+-		/* Let someone else run. */
+-		intr_disable();
+-		thread_block();
+-
+-		/* Re-enable interrupts and wait for the next one.
+-
+-		 The `sti' instruction disables interrupts until the
+-		 completion of the next instruction, so these two
+-		 instructions are executed atomically.  This atomicity is
+-		 important; otherwise, an interrupt could be handled
+-		 between re-enabling interrupts and waiting for the next
+-		 one to occur, wasting as much as one clock tick worth of
+-		 time.
+-
+-		 See [IA32-v2a] "HLT", [IA32-v2b] "STI", and [IA32-v3a]
+-		 7.11.1 "HLT Instruction". */
+-		asm volatile ("sti; hlt" : : : "memory");
+-	}
++  struct semaphore *idle_started = idle_started_;
++  idle_thread = thread_current ();
++  sema_up (idle_started);
++
++  for (;;) 
++    {
++      /* Let someone else run. */
++      intr_disable ();
++      thread_block ();
++
++      /* Re-enable interrupts and wait for the next one.
++
++         The `sti' instruction disables interrupts until the
++         completion of the next instruction, so these two
++         instructions are executed atomically.  This atomicity is
++         important; otherwise, an interrupt could be handled
++         between re-enabling interrupts and waiting for the next
++         one to occur, wasting as much as one clock tick worth of
++         time.
++
++         See [IA32-v2a] "HLT", [IA32-v2b] "STI", and [IA32-v3a]
++         7.11.1 "HLT Instruction". */
++      asm volatile ("sti; hlt" : : : "memory");
++    }
+ }
+ 
+ /* Function used as the basis for a kernel thread. */
+@@ -459,9 +428,9 @@ kernel_thread (thread_func *function, void *aux)
+ {
+   ASSERT (function != NULL);
+ 
+-	intr_enable(); /* The scheduler runs with interrupts off. */
+-	function(aux); /* Execute the thread function. */
+-	thread_exit(); /* If function() returns, kill the thread. */
++  intr_enable ();       /* The scheduler runs with interrupts off. */
++  function (aux);       /* Execute the thread function. */
++  thread_exit ();       /* If function() returns, kill the thread. */
+ }
+ 
+ /* Returns the running thread. */
+@@ -470,12 +439,12 @@ running_thread (void)
+ {
+   uint32_t *esp;
+ 
+-	/* Copy the CPU's stack pointer into `esp', and then round that
+-	 down to the start of a page.  Because `struct thread' is
+-	 always at the beginning of a page and the stack pointer is
+-	 somewhere in the middle, this locates the curent thread. */
+-	asm ("mov %%esp, %0" : "=g" (esp));
+-	return pg_round_down(esp);
++  /* Copy the CPU's stack pointer into `esp', and then round that
++     down to the start of a page.  Because `struct thread' is
++     always at the beginning of a page and the stack pointer is
++     somewhere in the middle, this locates the curent thread. */
++  asm ("mov %%esp, %0" : "=g" (esp));
++  return pg_round_down (esp);
+ }
+ 
+ /* Returns true if T appears to point to a valid thread. */
+@@ -494,32 +463,33 @@ init_thread (struct thread *t, const char *name, int priority)
+   ASSERT (PRI_MIN <= priority && priority <= PRI_MAX);
+   ASSERT (name != NULL);
+ 
+-	memset(t, 0, sizeof *t);
+-	t->status = THREAD_BLOCKED;
+-	strlcpy(t->name, name, sizeof t->name);
+-	t->stack = (uint8_t *) t + PGSIZE;
+-	t->priority = priority;
+-	t->magic = THREAD_MAGIC;
+-	list_push_back(&all_list, &t->allelem);
++  memset (t, 0, sizeof *t);
++  t->status = THREAD_BLOCKED;
++  strlcpy (t->name, name, sizeof t->name);
++  t->stack = (uint8_t *) t + PGSIZE;
++  t->priority = priority;
++  t->magic = THREAD_MAGIC;
++  list_push_back (&all_list, &t->allelem);
+ }
+ 
+ /* Allocates a SIZE-byte frame at the top of thread T's stack and
+- returns a pointer to the frame's base. */
++   returns a pointer to the frame's base. */
+ static void *
+-alloc_frame(struct thread *t, size_t size) {
+-	/* Stack data is always allocated in word-size units. */
+-	ASSERT(is_thread(t));
+-	ASSERT(size % sizeof(uint32_t) == 0);
++alloc_frame (struct thread *t, size_t size) 
++{
++  /* Stack data is always allocated in word-size units. */
++  ASSERT (is_thread (t));
++  ASSERT (size % sizeof (uint32_t) == 0);
+ 
+-	t->stack -= size;
+-	return t->stack;
++  t->stack -= size;
++  return t->stack;
+ }
+ 
+ /* Chooses and returns the next thread to be scheduled.  Should
+- return a thread from the run queue, unless the run queue is
+- empty.  (If the running thread can continue running, then it
+- will be in the run queue.)  If the run queue is empty, return
+- idle_thread. */
++   return a thread from the run queue, unless the run queue is
++   empty.  (If the running thread can continue running, then it
++   will be in the run queue.)  If the run queue is empty, return
++   idle_thread. */
+ static struct thread *
+ next_thread_to_run (void) 
+ {
+@@ -530,82 +500,88 @@ next_thread_to_run (void)
+ }
+ 
+ /* Completes a thread switch by activating the new thread's page
+- tables, and, if the previous thread is dying, destroying it.
+-
+- At this function's invocation, we just switched from thread
+- PREV, the new thread is already running, and interrupts are
+- still disabled.  This function is normally invoked by
+- thread_schedule() as its final action before returning, but
+- the first time a thread is scheduled it is called by
+- switch_entry() (see switch.S).
++   tables, and, if the previous thread is dying, destroying it.
+ 
+- It's not safe to call printf() until the thread switch is
+- complete.  In practice that means that printf()s should be
+- added at the end of the function.
++   At this function's invocation, we just switched from thread
++   PREV, the new thread is already running, and interrupts are
++   still disabled.  This function is normally invoked by
++   thread_schedule() as its final action before returning, but
++   the first time a thread is scheduled it is called by
++   switch_entry() (see switch.S).
+ 
+- After this function and its caller returns, the thread switch
+- is complete. */
+-void thread_schedule_tail(struct thread *prev) {
+-	struct thread *cur = running_thread();
++   It's not safe to call printf() until the thread switch is
++   complete.  In practice that means that printf()s should be
++   added at the end of the function.
+ 
+-	ASSERT(intr_get_level() == INTR_OFF);
++   After this function and its caller returns, the thread switch
++   is complete. */
++void
++thread_schedule_tail (struct thread *prev)
++{
++  struct thread *cur = running_thread ();
++  
++  ASSERT (intr_get_level () == INTR_OFF);
+ 
+-	/* Mark us as running. */
+-	cur->status = THREAD_RUNNING;
++  /* Mark us as running. */
++  cur->status = THREAD_RUNNING;
+ 
+-	/* Start new time slice. */
+-	thread_ticks = 0;
++  /* Start new time slice. */
++  thread_ticks = 0;
+ 
+ #ifdef USERPROG
+-	/* Activate the new address space. */
+-	process_activate ();
++  /* Activate the new address space. */
++  process_activate ();
+ #endif
+ 
+-	/* If the thread we switched from is dying, destroy its struct
+-	 thread.  This must happen late so that thread_exit() doesn't
+-	 pull out the rug under itself.  (We don't free
+-	 initial_thread because its memory was not obtained via
+-	 palloc().) */
+-	if (prev != NULL && prev->status == THREAD_DYING
+-			&& prev != initial_thread) {
+-		ASSERT(prev != cur);
+-		palloc_free_page(prev);
+-	}
++  /* If the thread we switched from is dying, destroy its struct
++     thread.  This must happen late so that thread_exit() doesn't
++     pull out the rug under itself.  (We don't free
++     initial_thread because its memory was not obtained via
++     palloc().) */
++  if (prev != NULL && prev->status == THREAD_DYING && prev != initial_thread) 
++    {
++      ASSERT (prev != cur);
++      palloc_free_page (prev);
++    }
+ }
+ 
+ /* Schedules a new process.  At entry, interrupts must be off and
+- the running process's state must have been changed from
+- running to some other state.  This function finds another
+- thread to run and switches to it.
+-
+- It's not safe to call printf() until thread_schedule_tail()
+- has completed. */
+-static void schedule(void) {
+-	struct thread *cur = running_thread();
+-	struct thread *next = next_thread_to_run();
+-	struct thread *prev = NULL;
+-
+-	ASSERT(intr_get_level() == INTR_OFF);
+-	ASSERT(cur->status != THREAD_RUNNING);
+-	ASSERT(is_thread(next));
+-
+-	if (cur != next)
+-		prev = switch_threads(cur, next);
+-	thread_schedule_tail(prev);
++   the running process's state must have been changed from
++   running to some other state.  This function finds another
++   thread to run and switches to it.
++
++   It's not safe to call printf() until thread_schedule_tail()
++   has completed. */
++static void
++schedule (void) 
++{
++  struct thread *cur = running_thread ();
++  struct thread *next = next_thread_to_run ();
++  struct thread *prev = NULL;
++
++  ASSERT (intr_get_level () == INTR_OFF);
++  ASSERT (cur->status != THREAD_RUNNING);
++  ASSERT (is_thread (next));
++
++  if (cur != next)
++    prev = switch_threads (cur, next);
++  thread_schedule_tail (prev);
+ }
+ 
+ /* Returns a tid to use for a new thread. */
+-static tid_t allocate_tid(void) {
+-	static tid_t next_tid = 1;
+-	tid_t tid;
++static tid_t
++allocate_tid (void) 
++{
++  static tid_t next_tid = 1;
++  tid_t tid;
+ 
+-	lock_acquire(&tid_lock);
+-	tid = next_tid++;
+-	lock_release(&tid_lock);
++  lock_acquire (&tid_lock);
++  tid = next_tid++;
++  lock_release (&tid_lock);
+ 
+-	return tid;
++  return tid;
+ }
+ 
+ /* Offset of `stack' member within `struct thread'.
+- Used by switch.S, which can't figure it out on its own. */
+-uint32_t thread_stack_ofs = offsetof(struct thread, stack);
++   Used by switch.S, which can't figure it out on its own. */
++uint32_t thread_stack_ofs = offsetof (struct thread, stack);
+diff --git a/src/threads/thread.h b/src/threads/thread.h
+index 4d98acf..7965c06 100644
+--- a/src/threads/thread.h
++++ b/src/threads/thread.h
+@@ -4,7 +4,6 @@
+ #include <debug.h>
+ #include <list.h>
+ #include <stdint.h>
+-#include <lib/fixedpoint.h>
+ 
+ /* States in a thread's life cycle. */
+ enum thread_status
+@@ -88,7 +87,7 @@ struct thread
+     enum thread_status status;          /* Thread state. */
+     char name[16];                      /* Name (for debugging purposes). */
+     uint8_t *stack;                     /* Saved stack pointer. */
+-    fixed_point_t recent_cpu_time;
++    int priority;                       /* Priority. */
+     struct list_elem allelem;           /* List element for all threads list. */
+ 
+     /* Shared between thread.c and synch.c. */
+@@ -99,13 +98,6 @@ struct thread
+     uint32_t *pagedir;                  /* Page directory. */
+ #endif
+ 
+-    /* the following filed is added for making alarm clock work */
+-    int64_t sleep_ticks;
+-
+-    /* Thread priority -> recalculated every 4 clock ticks for the MLFQ scheduler */
+-    int           priority;
+-
+-    int nice;
+     /* Owned by thread.c. */
+     unsigned magic;                     /* Detects stack overflow. */
+   };
+diff --git a/src/userprog/Make.vars b/src/userprog/Make.vars
+index e4dbb08..e470292 100644
+--- a/src/userprog/Make.vars
++++ b/src/userprog/Make.vars
+@@ -4,4 +4,4 @@ kernel.bin: DEFINES = -DUSERPROG -DFILESYS
+ KERNEL_SUBDIRS = threads devices lib lib/kernel userprog filesys
+ TEST_SUBDIRS = tests/userprog tests/userprog/no-vm tests/filesys/base
+ GRADING_FILE = $(SRCDIR)/tests/userprog/Grading
+-SIMULATOR = --qemu
++SIMULATOR = --bochs
+diff --git a/src/utils/pintos b/src/utils/pintos
+index 1305a4b..f8d02d7 100755
+--- a/src/utils/pintos
++++ b/src/utils/pintos
+@@ -925,6 +925,7 @@ sub exec_setitimer {
+     exit (1);
+ }
+ 
++
+ sub SIGVTALRM {
+     use Config;
+     my $i = 0;
+@@ -935,6 +936,7 @@ sub SIGVTALRM {
+     return 0;
+ }
+ 
++
+ # find_in_path ($program)
+ #
+ # Searches for $program in $ENV{PATH}.
+diff --git a/src/utils/setitimer-helper.o b/src/utils/setitimer-helper.o
+deleted file mode 100644
+index 3e94af8..0000000
+Binary files a/src/utils/setitimer-helper.o and /dev/null differ
+diff --git a/src/utils/squish-pty.o b/src/utils/squish-pty.o
+deleted file mode 100644
+index 1060117..0000000
+Binary files a/src/utils/squish-pty.o and /dev/null differ
+diff --git a/src/utils/squish-unix.o b/src/utils/squish-unix.o
+deleted file mode 100644
+index 3a0e0f5..0000000
+Binary files a/src/utils/squish-unix.o and /dev/null differ
