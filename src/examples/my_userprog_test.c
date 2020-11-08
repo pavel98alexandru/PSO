@@ -12,9 +12,7 @@
 int
 main (int argc, char **argv)
 {
-	printf("Hello world!\n");
-
-	return 0;
+	write(1, "Hello world!\n", 13);
+    
+	return EXIT_SUCCESS;
 }
-
-

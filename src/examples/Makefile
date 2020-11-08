@@ -18,7 +18,7 @@ lineup_SRC = lineup.c
 ls_SRC = ls.c
 recursor_SRC = recursor.c
 rm_SRC = rm.c
-my_userprog_test_SRC = my_userprog_test.c 
+my_userprog_test_SRC = my_userprog_test.c
 my_userprog_std_inout_SRC = my_userprog_std_inout.c
 
 # Should work in project 3; also in project 4 if VM is included.
