@@ -18,6 +18,10 @@
 #include "threads/thread.h"
 #include "threads/vaddr.h"
 
+
+/* Added by Adrian Colesa - multithreading */
+#include <syscall-nr.h>
+
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
 
@@ -66,6 +70,9 @@ start_process (void *file_name_)
   if (!success) 
     thread_exit ();
 
+  /* Added by Adrian Colesa - multithreading */
+  thread_current()->pid = thread_current()->tid;	// the main thread has pid = tid
+
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
      threads/intr-stubs.S).  Because intr_exit takes all of its
@@ -88,11 +95,11 @@ start_process (void *file_name_)
 int
 process_wait (tid_t child_tid UNUSED) 
 {
-  // UTCN
-  while(1);
+	// Added by Adrian Colesa - multithreading
+	printf("Thread %s that started the testing program (and corresponding thread) waits after created process to finish its execution\n", thread_current()->name);
+	while (1);
 
-  // orifinal
-  //return -1;
+	return -1;
 }
 
 /* Free the current process's resources. */
@@ -107,16 +114,23 @@ process_exit (void)
   pd = cur->pagedir;
   if (pd != NULL) 
     {
-      /* Correct ordering here is crucial.  We must set
-         cur->pagedir to NULL before switching page directories,
-         so that a timer interrupt can't switch back to the
-         process page directory.  We must activate the base page
-         directory before destroying the process's page
-         directory, or our active page directory will be one
-         that's been freed (and cleared). */
-      cur->pagedir = NULL;
-      pagedir_activate (NULL);
-      pagedir_destroy (pd);
+	  /* Added by Adrian Colesa - multithreading */
+	  /* Only the if and then branch was added, the else was here initialy */
+	  if (cur->pid != cur->tid)	{ // not the main thread of the process
+		  cur->pagedir = NULL;
+		  pagedir_activate (NULL);
+	  } else {
+		  /* Correct ordering here is crucial.  We must set
+			 cur->pagedir to NULL before switching page directories,
+			 so that a timer interrupt can't switch back to the
+			 process page directory.  We must activate the base page
+			 directory before destroying the process's page
+			 directory, or our active page directory will be one
+			 that's been freed (and cleared). */
+		  cur->pagedir = NULL;
+		  pagedir_activate (NULL);
+		  pagedir_destroy (pd);
+	  }
     }
 }
 
@@ -295,6 +309,15 @@ load (const char *file_name, void (**eip) (void), void **esp)
                   read_bytes = 0;
                   zero_bytes = ROUND_UP (page_offset + phdr.p_memsz, PGSIZE);
                 }
+
+              // Added by Adrian Colesa
+              /*
+              if (!writable)
+            	  printf("[load] Loading CODE segment of %d bytes size starting from virtual memory 0x%x (physical memory 0x%x)\n", read_bytes, phdr.p_vaddr, phdr.p_paddr);
+              else
+            	  printf("[load] Loading DATA segment of %d bytes size starting from virtual memory 0x%x (physical memory 0x%x)\n", read_bytes, phdr.p_vaddr, phdr.p_paddr);
+               */
+
               if (!load_segment (file, file_page, (void *) mem_page,
                                  read_bytes, zero_bytes, writable))
                 goto done;
@@ -413,6 +436,11 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
         }
       memset (kpage + page_read_bytes, 0, page_zero_bytes);
 
+      // Added by Adrian Colesa
+      /*
+      printf("[load_segment] The process virtual page %d starting at virtual address 0x%x will be mapped onto the kernel virtual page %d (physical frame %d) starting at kernel virtual address 0x%x (physical address 0x%x)\n", ((unsigned int) upage)/PGSIZE, upage, (unsigned int)kpage/PGSIZE, ((unsigned int)vtop(kpage))/PGSIZE, kpage, vtop(kpage));
+       */
+
       /* Add the page to the process's address space. */
       if (!install_page (upage, kpage, writable)) 
         {
@@ -439,13 +467,17 @@ setup_stack (void **esp)
   kpage = palloc_get_page (PAL_USER | PAL_ZERO);
   if (kpage != NULL) 
     {
+	  // Added by Adrian Colesa
+	  /*
+		printf("[setup_stack] The stack virtual page %d starting at virtual address 0x%x will be mapped onto the kernel virtual page %d (physical frame %d) starting at kernel virtual address 0x%x (physical address 0x%x)\n", (((unsigned int) PHYS_BASE) - PGSIZE)/PGSIZE, (((uint8_t *) PHYS_BASE) - PGSIZE), (unsigned int)kpage/PGSIZE, ((unsigned int)vtop(kpage))/PGSIZE, kpage, vtop(kpage));
+	   */
+
       success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);
       if (success) {
-	// UTCN
-	*esp = PHYS_BASE - 12;
-        //original
-        //*esp = PHYS_BASE;
-      } else
+    	  // Changed by Adrian Colesa
+        *esp = PHYS_BASE - 12;
+      }
+      else
         palloc_free_page (kpage);
     }
   return success;
@@ -469,4 +501,75 @@ install_page (void *upage, void *kpage, bool writable)
      address, then map our page there. */
   return (pagedir_get_page (t->pagedir, upage) == NULL
           && pagedir_set_page (t->pagedir, upage, kpage, writable));
+}
+
+
+
+/* Added by Adrian Colesa - multithreading */
+
+static void
+start_process_uthread(struct uthread_args *th_arg);
+
+/* Starts a new user thread running a user function in the current process */
+tid_t
+process_uthread_execute (struct uthread_args *th_arg)
+{
+  tid_t tid;
+
+  /* Create a new thread to execute the user specified function */
+  tid = thread_create (th_arg->th_name, PRI_DEFAULT, start_process_uthread, th_arg);
+  if (tid == TID_ERROR)
+    return -1;
+
+  return tid;
+}
+
+/* A user thread that starts running a user function */
+static void
+start_process_uthread(struct uthread_args *th_arg)
+{
+	  struct intr_frame if_;
+	  bool success;
+
+	  /* Initialize interrupt frame and load executable. */
+	  memset (&if_, 0, sizeof if_);
+	  if_.gs = if_.fs = if_.es = if_.ds = if_.ss = SEL_UDSEG;
+	  if_.cs = SEL_UCSEG;
+	  if_.eflags = FLAG_IF | FLAG_MBS;
+
+	  // Here comes user thread's stack preparation
+	  // Set the stack. Divide the stack page allocated at the end of address space,
+	  // just before PHYS_BASE, between the TH_NO+1 threads:
+	  // the main thread receives first half of the page and the other half to
+	  // the other TH_NO threads, created after the main one
+	  if_.esp = (PHYS_BASE - PGSIZE/2) - (th_arg->th_no * ((int)(PGSIZE/2)/TH_NO));
+
+	  // Set the new uthread pagedir to be the same as that of its process and activate it
+	  thread_current()->pagedir = th_arg->th_pagedir;
+	  process_activate();
+
+	  // Set the function argument on the stack
+	  if_.esp -= 4;
+	  *((int*)if_.esp) = th_arg->th_fc_arg;
+
+	  if_.esp -= 4;
+	  //*((int*)if_.esp) = return address;
+	  // does not matter as long as the thread calls uthread_exit
+	  // in the future this must be fixed such that the thread function returns in the thread_exit, even if not explicitly called
+
+	  // Set the EIP to the address of function
+	  if_.eip = (void (*) (void)) th_arg->th_fc_addr;
+
+	  // Set the thread pid that of the main thread of the process it belongs to
+	  thread_current()->pid = th_arg->th_pid;
+	  thread_current()->uthread_id = th_arg->th_no;
+
+	  /* Start the user thread by simulating a return from an
+	     interrupt, implemented by intr_exit (in
+	     threads/intr-stubs.S).  Because intr_exit takes all of its
+	     arguments on the stack in the form of a `struct intr_frame',
+	     we just point the stack pointer (%esp) to our stack frame
+	     and jump to it. */
+	  asm volatile ("movl %0, %%esp; jmp intr_exit" : : "g" (&if_) : "memory");
+	  NOT_REACHED ();
 }

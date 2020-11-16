@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <debug.h>
 
+/* Added by Adrian Colesa - multithreading */
+#include "../syscall-nr.h"
+
 /* Process identifier. */
 typedef int pid_t;
 #define PID_ERROR ((pid_t) -1)
@@ -47,13 +50,10 @@ int inumber (int fd);
 
 // Added by Adrian Colesa - multithreading
 typedef int (*THREAD_FUNC)(int);
-int uthread_create(THREAD_FUNC, int*);
+int uthread_create(THREAD_FUNC, int);
 int uthread_join(int, int*);
-int uthread_joinall(void);
 void uthread_exit(int);
-int uthread_getpid(void);
-int uthread_gettid(void);
-void uthread_msleep( uint32_t);
-
+int uthread_getpid();
+int uthread_gettid();
 
 #endif /* lib/user/syscall.h */
