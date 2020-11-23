@@ -47,8 +47,13 @@ int inumber (int fd);
 
 // Added by Adrian Colesa - multithreading
 typedef int (*THREAD_FUNC)(int);
-int thread_create(THREAD_FUNC, int);
-int thread_join(int, int*);
-void thread_exit(int);
+int uthread_create(THREAD_FUNC, int*);
+int uthread_join(int, int*);
+int uthread_joinall(void);
+void uthread_exit(int);
+int uthread_getpid(void);
+int uthread_gettid(void);
+void uthread_msleep( uint32_t);
+
 
 #endif /* lib/user/syscall.h */

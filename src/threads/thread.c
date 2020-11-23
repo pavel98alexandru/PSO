@@ -24,10 +24,6 @@
    that are ready to run but not actually running. */
 static struct list ready_list;
 
-/* Added by Adrian Colesa */
-/* List of thread statistics elements, to be maintained even after thread termination */
-static struct list thread_statistics_list;
-
 /* List of all processes.  Processes are added to this list
    when they are first scheduled and removed when they exit. */
 static struct list all_list;
@@ -97,9 +93,6 @@ thread_init (void)
   list_init (&ready_list);
   list_init (&all_list);
 
-  /* Added by Adrian Colesa */
-  list_init (&thread_statistics_list);
-
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread ();
   init_thread (initial_thread, "main", PRI_DEFAULT);
@@ -117,22 +110,9 @@ thread_start (void)
   sema_init (&idle_started, 0);
   thread_create ("idle", PRI_MIN, idle, &idle_started);
 
-  /* Added by Adrian Colesa */
-  /* Allocate the stats field for the main thread, while it is not created using thread_create function */
-  struct thread *t = thread_current();
-  t->stats = (struct thread_statistics *) malloc (sizeof (struct thread_statistics));
-  ASSERT(t->stats != NULL);
-  t->stats->running_time = 0;
-  t->stats->ready_waiting_time = 0;
-  t->stats->blocked_waiting_time = 0;
-  t->stats->last_reaction_time = -1;
-  t->stats->max_reaction_time = -1;
-  t->stats->reaction_time = 0;
-  t->stats->tid = t->tid;
-  list_push_back(&thread_statistics_list, &t->stats->stats_elem);
-
   /* Start preemptive thread scheduling. */
   intr_enable ();
+
   /* Wait for the idle thread to initialize idle_thread. */
   sema_down (&idle_started);
 }
@@ -204,22 +184,6 @@ thread_create (const char *name, int priority,
   init_thread (t, name, priority);
   tid = t->tid = allocate_tid ();
 
-  /* Added by Adrian Colesa */
-  /* Allocate the thread statistics structure and initialize its fields */
-  t->stats = (struct thread_statistics *) malloc (sizeof (struct thread_statistics));
-  ASSERT(t->stats != NULL);
-  t->stats->running_time = 0;
-  t->stats->ready_waiting_time = 0;
-  t->stats->blocked_begin = -1;
-  t->stats->blocked_waiting_time = 0;
-  t->stats->no_waiting_time = 0;
-  t->stats->last_reaction_time = -1;
-  t->stats->max_reaction_time = -1;
-  t->stats->reaction_time = 0;
-  t->stats->tid = tid;
-  t->stats->execution_begin = timer_ticks();
-  list_push_back(&thread_statistics_list, &t->stats->stats_elem);
-
   /* Prepare thread for first run by initializing its stack.
      Do this atomically so intermediate values for the 'stack' 
      member cannot be observed. */
@@ -260,12 +224,7 @@ thread_block (void)
   ASSERT (!intr_context ());
   ASSERT (intr_get_level () == INTR_OFF);
 
-  /* Added by Adrian Colesa */
-  thread_current()->stats->blocked_begin = timer_ticks();
-  thread_current()->stats->no_waiting_time++;
-
   thread_current ()->status = THREAD_BLOCKED;
-
   schedule ();
 }
 
@@ -286,14 +245,6 @@ thread_unblock (struct thread *t)
 
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
-
-  /* Added by Adrian Colesa */
-  t->stats->ready_begin = timer_ticks();
-  if (t->stats->blocked_begin > -1) {	// was blocked previously and it is not a just starting thread
-	  t->stats->blocked_waiting_time += timer_ticks() - t->stats->blocked_begin;
-	  t->stats->last_reaction_time = t->stats->ready_begin;
-  }
-
   list_push_back (&ready_list, &t->elem);
   t->status = THREAD_READY;
   intr_set_level (old_level);
@@ -347,10 +298,8 @@ thread_exit (void)
      and schedule another process.  That process will destroy us
      when it calls thread_schedule_tail(). */
   intr_disable ();
-
   list_remove (&thread_current()->allelem);
   thread_current ()->status = THREAD_DYING;
-
   schedule ();
   NOT_REACHED ();
 }
@@ -369,11 +318,6 @@ thread_yield (void)
   if (cur != idle_thread) 
     list_push_back (&ready_list, &cur->elem);
   cur->status = THREAD_READY;
-
-  /* Added by Adrian Colesa */
-  cur->stats->ready_begin = timer_ticks();
-  cur->stats->last_reaction_time = -1; // there is no reaction time here, since the thread is not woken up
-
   schedule ();
   intr_set_level (old_level);
 }
@@ -439,7 +383,7 @@ thread_get_recent_cpu (void)
   /* Not yet implemented. */
   return 0;
 }
-
+
 /* Idle thread.  Executes when no other thread is ready to run.
 
    The idle thread is initially put on the ready list by
@@ -488,7 +432,7 @@ kernel_thread (thread_func *function, void *aux)
   function (aux);       /* Execute the thread function. */
   thread_exit ();       /* If function() returns, kill the thread. */
 }
-
+
 /* Returns the running thread. */
 struct thread *
 running_thread (void) 
@@ -619,29 +563,14 @@ schedule (void)
   ASSERT (cur->status != THREAD_RUNNING);
   ASSERT (is_thread (next));
 
-  if (cur != next){
-	/* Added by Adrian Colesa */
-	cur->stats->running_time += timer_ticks() - cur->stats->running_begin;
-	if (cur->status == THREAD_DYING)
-		  cur->stats->execution_time = timer_ticks() - cur->stats->execution_begin;
-
-	if (next->stats->last_reaction_time > -1) { // was not previously suspended due to TIME_SLICE expiration
-		next->stats->last_reaction_time = timer_ticks() - next->stats->last_reaction_time;
-		next->stats->reaction_time += next->stats->last_reaction_time;
-		if (next->stats->last_reaction_time > next->stats->max_reaction_time)
-			next->stats->max_reaction_time = next->stats->last_reaction_time;
-	}
-	next->stats->ready_waiting_time += timer_ticks() - next->stats->ready_begin;
-	next->stats->running_begin = timer_ticks();
-
+  if (cur != next)
     prev = switch_threads (cur, next);
-  }
   thread_schedule_tail (prev);
 }
 
 /* Returns a tid to use for a new thread. */
 static tid_t
-allocate_tid (void)
+allocate_tid (void) 
 {
   static tid_t next_tid = 1;
   tid_t tid;
@@ -652,119 +581,7 @@ allocate_tid (void)
 
   return tid;
 }
-
-/* Adrian Colesa */
-char* thread_status(enum thread_status status)
-{
-	char* str_status=malloc(30);
-
-	switch (status) {
-	case THREAD_RUNNING:     /* Running thread. */
-    	strlcpy(str_status, "THREAD_RUNNING", 29);
-    	break;
-	case THREAD_READY:       /* Not running but ready to run. */
-    	strlcpy(str_status, "THREAD_READY", 29);
-    	break;
-	case THREAD_BLOCKED:     /* Waiting for an event to trigger. */
-    	strlcpy(str_status, "THREAD_BLOCKED", 29);
-    	break;
-	case THREAD_DYING:        /* About to be destroyed. */
-    	strlcpy(str_status, "THREAD_DYING", 29);
-    	break;
-	default:
-		strlcpy(str_status, "THREAD_UNKNOWN_STATUS", 29);
-		break;
-	}
-
-	return str_status;
-}
-
+
 /* Offset of `stack' member within `struct thread'.
    Used by switch.S, which can't figure it out on its own. */
 uint32_t thread_stack_ofs = offsetof (struct thread, stack);
-
-
-/* Added by Adrian Colesa */
-static struct thread_statistics* find_thread_statistics(int tid)
-{
-	struct list_elem *e;
-
-	for (e = list_begin (&thread_statistics_list); e != list_end (&thread_statistics_list);
-			e = list_next (e)) {
-	          struct thread_statistics *f = list_entry (e, struct thread_statistics, stats_elem);
-	          if (f->tid == tid) {
-	        	  return f;
-	          }
-	}
-
-	return NULL;
-}
-
-int thread_get_execution_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->execution_time;
-}
-
-int thread_get_running_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->running_time;
-}
-
-int thread_get_ready_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->ready_waiting_time;
-}
-
-int thread_get_blocked_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->blocked_waiting_time;
-}
-
-int thread_get_avg_reaction_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->no_waiting_time>0?stats->reaction_time / stats->no_waiting_time:-1;
-}
-
-int thread_get_max_reaction_time(int tid)
-{
-	struct thread_statistics *stats;
-
-	stats = find_thread_statistics(tid);
-	if (stats == NULL)
-		return -1;
-
-	return stats->max_reaction_time;
-}
-
-
-

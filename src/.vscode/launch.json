@@ -8,7 +8,7 @@
             "name": "gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/vm/build/kernel.o",
+            "program": "${workspaceRoot}/threads/build/kernel.o",
             "miDebuggerServerAddress": "localhost:1234",
             "args": [],
             "stopAtEntry": false,
