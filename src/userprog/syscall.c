@@ -13,8 +13,33 @@ syscall_init (void)
 }
 
 static void
-syscall_handler (struct intr_frame *f UNUSED) 
+syscall_handler (struct intr_frame *f)
 {
-  printf ("system call!\n");
-  thread_exit ();
+	int fd, no;
+	char *buf;
+
+	int syscall_no = ((int*)f->esp)[0];
+
+	//printf ("system call no %d!\n", syscall_no);
+
+	switch (syscall_no) {
+		case SYS_EXIT:
+			//printf ("SYS_EXIT system call!\n");
+			thread_exit();
+			break;
+		case SYS_WRITE:
+			//printf ("SYS_WRITE system call from thread %d!\n", thread_current()->tid);
+
+			fd = ((int*)f->esp)[1];
+			buf = (char*) ((int*)f->esp)[2];
+			no = ((int*)f->esp)[3];
+
+			if (fd == 1)
+				putbuf(buf, no);
+
+			f->eax = no;
+			return;
+	}
+
+	thread_exit ();
 }
