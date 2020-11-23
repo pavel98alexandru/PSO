@@ -32,6 +32,7 @@ extern test_func test_mlfqs_fair_20;
 extern test_func test_mlfqs_nice_2;
 extern test_func test_mlfqs_nice_10;
 extern test_func test_mlfqs_block;
+<<<<<<< HEAD
 
 /* Adrian Colesa */
 extern test_func my_test_create_threads;
@@ -40,6 +41,8 @@ extern test_func my_test_synch_sema;
 extern test_func my_test_synch_lock;
 extern test_func my_test_synch_cond;
 
+=======
+>>>>>>> 6d50e4ff8e450295454e3ad6be72e9d9d4de5bbc
 
 void msg (const char *, ...);
 void fail (const char *, ...);
