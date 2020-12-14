@@ -925,7 +925,6 @@ sub exec_setitimer {
     exit (1);
 }
 
-
 sub SIGVTALRM {
     use Config;
     my $i = 0;
@@ -935,7 +934,6 @@ sub SIGVTALRM {
     }
     return 0;
 }
-
 
 # find_in_path ($program)
 #
